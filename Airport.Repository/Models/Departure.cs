@@ -10,6 +10,6 @@ namespace Airport.Repository.Models
 
         public Crew Crew { get; set; }
 
-        public Airplane Airplane { get; set; }
+        public Aeroplane Airplane { get; set; }
     }
 }
