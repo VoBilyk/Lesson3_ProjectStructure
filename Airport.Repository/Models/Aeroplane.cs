@@ -2,7 +2,7 @@
 
 namespace Airport.Repository.Models
 {
-    public class Aeroplane
+    public class Aeroplane : IEntity
     {
         public Guid Id { get; set; }
 

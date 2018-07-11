@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Airport.Repository.Models
 {
-    public class AeroplaneType
+    public class AeroplaneType : IEntity
     {
         public Guid Id { get; set; }
 

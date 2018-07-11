@@ -2,7 +2,7 @@
 
 namespace Airport.Repository.Models
 {
-    public class Departure
+    public class Departure : IEntity
     {
         public Guid Id { get; set; }
 

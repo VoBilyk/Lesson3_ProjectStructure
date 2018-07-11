@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Airport.Repository.Models
 {
-    public class Flight
+    public class Flight : IEntity
     {
         public Guid Id { get; set; }
 

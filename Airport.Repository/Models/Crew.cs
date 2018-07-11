@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Airport.Repository.Models
 {
-    public class Crew
+    public class Crew : IEntity
     {
         public Guid Id { get; set; }
 
