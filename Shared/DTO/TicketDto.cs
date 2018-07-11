@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Shared.DTO
 {
-    public class Crew
+    public class TicketDto
     {
         public Guid Id { get; set; }
 
-        public Pilot Pilot { get; set; }
+        public decimal Price { get; set; }
 
-        public List<Stewardess> Stewardesses { get; set; }
+        public FlightDto Flight { get; set; }
     }
 }

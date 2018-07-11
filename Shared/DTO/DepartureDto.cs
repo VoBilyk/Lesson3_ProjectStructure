@@ -4,14 +4,14 @@ using System.Text;
 
 namespace Shared.DTO
 {
-    public class Departure
+    public class DepartureDto
     {
         public Guid Id { get; set; }
 
         public DateTime Time { get; set; }
 
-        public Crew Crew { get; set; }
+        public CrewDto Crew { get; set; }
 
-        public Aeroplane Airplane { get; set; }
+        public AeroplaneDto Airplane { get; set; }
     }
 }

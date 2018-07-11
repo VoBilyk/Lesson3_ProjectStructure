@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Shared.DTO
 {
-    public class AeroplaneType
+    public class AeroplaneTypeDto
     {
         public Guid Id { get; set; }
 

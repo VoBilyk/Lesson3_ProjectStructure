@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Shared.DTO
 {
-    public class Flight
+    public class FlightDto
     {
         public Guid Id { get; set; }
 
@@ -16,6 +16,6 @@ namespace Shared.DTO
 
         public DateTime DepartureTime { get; set; }
 
-        public List<Ticket> Tickets { get; set; }
+        public List<TicketDto> Tickets { get; set; }
     }
 }

@@ -2,13 +2,13 @@
 
 namespace Shared.DTO
 {
-    public class Aeroplane
+    public class AeroplaneDto
     {
         public Guid Id { get; set; }
 
         public string Name { get; set; }
 
-        public AeroplaneType AeroplaneType { get; set; }
+        public AeroplaneTypeDto AeroplaneType { get; set; }
 
         public TimeSpan Lifetime { get; set; }
     }

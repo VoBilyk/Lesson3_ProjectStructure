@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Shared.DTO
 {
-    public class Stewardess
+    public class PilotDto
     {
         public Guid Id { get; set; }
 
@@ -12,6 +12,6 @@ namespace Shared.DTO
 
         public string SecondName { get; set; }
 
-        public DateTime BirthDate { get; set; }
+        public TimeSpan Experience { get; set; }
     }
 }
