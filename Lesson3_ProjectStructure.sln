@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airport", "Airport\Airport.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airport.Repository", "Airport.Repository\Airport.Repository.csproj", "{A6161252-7553-405E-8A11-F5CA48E46ABB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airport.Service", "Airport.Service\Airport.Service.csproj", "{DC71E14E-994D-4A05-808A-C20010F00CC4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airport.Services", "Airport.Service\Airport.Services.csproj", "{DC71E14E-994D-4A05-808A-C20010F00CC4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{B66CC823-1DC5-4E01-AFC1-E612C13A41F7}"
 EndProject
