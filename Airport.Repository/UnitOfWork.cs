@@ -9,7 +9,7 @@ namespace Airport.Repository
     {
         private DataSource db = new DataSource();
 
-        private Repository ticketRepository;
+        private Repository<Ticket> ticketRepository;
 
         public IRepository<Ticket> GetTickets
         {
