@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Airport.Repository.Models;
+using Airport.DAL.Models;
 
-namespace Airport.Repository
+namespace Airport.DAL
 {
     public class UnitOfWork
     {

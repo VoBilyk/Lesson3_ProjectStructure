@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Airport.Repository.Models
+namespace Airport.DAL.Models
 {
     public class Flight : IEntity
     {

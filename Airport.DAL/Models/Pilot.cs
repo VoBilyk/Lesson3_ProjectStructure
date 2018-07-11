@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Airport.Repository.Models
+namespace Airport.DAL.Models
 {
     public class Pilot : IEntity
     {

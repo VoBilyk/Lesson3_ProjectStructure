@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Airport.Repository.Models;
 
-namespace Airport.Repository
+namespace Airport.DAL.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : IEntity
     {

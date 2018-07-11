@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Airport.Repository.Models
+namespace Airport.DAL.Models
 {
     public class AeroplaneType : IEntity
     {
