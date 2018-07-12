@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Airport.DAL.Interfaces;
+using System;
 
 namespace Airport.DAL.Models
 {

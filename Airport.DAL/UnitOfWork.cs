@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Airport.DAL.Interfaces;
 using Airport.DAL.Models;
 
 namespace Airport.DAL
