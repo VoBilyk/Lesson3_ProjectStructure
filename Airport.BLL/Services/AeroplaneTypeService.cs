@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Airport.BLL.Interfaces;
 using Airport.DAL.Interfaces;
 using Airport.DAL.Models;
@@ -9,7 +8,7 @@ using AutoMapper;
 
 namespace Airport.BLL.Services
 {
-    public class AeroplaneTypeService : IService<AeroplaneTypeDto>
+    public class AeroplaneTypeService : IAeroplaneTypeService
     {
         private IUnitOfWork db;
         private IMapper mapper;

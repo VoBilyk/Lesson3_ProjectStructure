@@ -8,7 +8,7 @@ using Airport.Shared.DTO;
 
 namespace Airport.BLL.Services
 {
-    public class PilotService : IService<PilotDto>
+    public class PilotService : IPilotService
     {
         private IUnitOfWork db;
         private IMapper mapper;

@@ -9,7 +9,7 @@ using AutoMapper;
 
 namespace Airport.BLL.Services
 {
-    public class AeroplaneService : IService<AeroplaneDto>
+    public class AeroplaneService : IAeroplaneService
     {
         private IUnitOfWork db;
         private IMapper mapper;

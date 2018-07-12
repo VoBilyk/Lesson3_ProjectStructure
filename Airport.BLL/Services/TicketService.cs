@@ -8,7 +8,7 @@ using Airport.Shared.DTO;
 
 namespace Airport.BLL.Services
 {
-    public class TicketService : IService<TicketDto>
+    public class TicketService : ITicketService
     {
         private IUnitOfWork db;
         private IMapper mapper;

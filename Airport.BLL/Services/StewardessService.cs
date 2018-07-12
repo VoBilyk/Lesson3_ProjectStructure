@@ -9,7 +9,7 @@ using Airport.Shared.DTO;
 
 namespace Airport.BLL.Services
 {
-    public class StewardessService : IService<StewardessDto>
+    public class StewardessService : IStewardessService
     {
         private IUnitOfWork db;
         private IMapper mapper;

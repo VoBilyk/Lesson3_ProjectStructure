@@ -10,8 +10,8 @@ namespace Airport.API.Controllers
     [Route("api/[controller]")]
     public class TicketsController : Controller
     {
-        IService<TicketDto> ticketService;
-        public TicketsController(IService<TicketDto> ticketService)
+        ITicketService ticketService;
+        public TicketsController(ITicketService ticketService)
         {
             this.ticketService = ticketService;
         }
@@ -28,7 +28,7 @@ namespace Airport.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { Type = ex.GetType().Name, Message = ex.Message });
+                return BadRequest(new { ErrorType = ex.GetType().Name, ex.Message });
             }
 
             return Ok(ticketDto);
@@ -46,7 +46,7 @@ namespace Airport.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { Type = ex.GetType().Name, Message = ex.Message });
+                return BadRequest(new { ErrorType = ex.GetType().Name, ex.Message });
             }
 
             return Ok(ticketDto);
@@ -69,7 +69,7 @@ namespace Airport.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { Type = ex.GetType().Name, Message = ex.Message });
+                return BadRequest(new { ErrorType = ex.GetType().Name, ex.Message });
             }
 
             return Ok(resultDto);
@@ -92,7 +92,7 @@ namespace Airport.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { Type = ex.GetType().Name, Message = ex.Message });
+                return BadRequest(new { ErrorType = ex.GetType().Name, ex.Message });
             }
 
             return Ok(resultDto);
@@ -107,7 +107,7 @@ namespace Airport.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { Type = ex.GetType().Name, Message = ex.Message });
+                return BadRequest(new { Type = ex.GetType().Name, ex.Message });
             }
             
             return NoContent();
@@ -123,7 +123,7 @@ namespace Airport.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { Type = ex.GetType().Name, Message = ex.Message });
+                return BadRequest(new { Type = ex.GetType().Name, ex.Message });
             }
 
             return NoContent();

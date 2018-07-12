@@ -35,10 +35,18 @@ namespace Airport.API
 
             //Instance injection
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IService<TicketDto>, TicketService>();
+            services.AddScoped<ITicketService, TicketService>();
+            services.AddScoped<IAeroplaneService, AeroplaneService>();
+            services.AddScoped<IAeroplaneTypeService, AeroplaneTypeService>();
+            services.AddScoped<ICrewService, CrewService>();
+            services.AddScoped<IPilotService, PilotService>();
+            services.AddScoped<IStewardessService, StewardessService>();
+            services.AddScoped<IFlightService, FlightService>();
+            services.AddScoped<IDepartureService, DepartureService>();
 
-            var mapper = MapperConfiguration().CreateMapper();
-            services.AddScoped(_ => mapper);
+
+
+            services.AddScoped(_ => MapperConfiguration().CreateMapper());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
