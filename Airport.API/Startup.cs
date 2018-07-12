@@ -10,8 +10,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Airport.DAL;
 using Airport.DAL.Interfaces;
-using Airport.BLL;
 using Airport.BLL.Interfaces;
+using Airport.BLL.Services;
 
 namespace Airport.API
 {
@@ -31,7 +31,7 @@ namespace Airport.API
 
             //Instance injection
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<ITicketService, ITicketService>();
+            services.AddScoped<ITicketService, TicketService>();
 
             //services.AddScoped(typeof(IAutoMapConverter<,>), typeof(AutoMapConverter<,>));
         }

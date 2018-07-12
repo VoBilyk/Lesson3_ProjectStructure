@@ -3,24 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Airport.BLL.Interfaces;
+using Airport.Shared.DTO;
+
 
 namespace Airport.API.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class TicketsController : Controller
     {
-        // GET api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        ITicketService ticketService;
+        public TicketsController(ITicketService ticketService)
         {
-            return new string[] { "value1", "value2" };
+            this.ticketService = ticketService;
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // GET: api/tickets
+        [HttpGet]
+        public IEnumerable<TicketDto> Get()
         {
-            return "value";
+            return ticketService.GetTickets();
+        }
+
+        // GET: api/tickets/:id
+        [HttpGet("{id}")]
+        public TicketDto Get(Guid? id)
+        {
+            return ticketService.GetTicket(id);
         }
 
         // POST api/values

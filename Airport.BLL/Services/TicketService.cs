@@ -25,10 +25,10 @@ namespace Airport.BLL.Services
                 throw new ArgumentNullException();
             }
 
-            var mapper = Configuration.MapperConfiguration().CreateMapper();
-            return mapper.Map<Ticket, TicketDto>(DB.TicketRepository.Get(id.Value));
-            //var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Ticket, TicketDto>()).CreateMapper();
+            //var mapper = Configuration.MapperConfiguration().CreateMapper();
             //return mapper.Map<Ticket, TicketDto>(DB.TicketRepository.Get(id.Value));
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Ticket, TicketDto>()).CreateMapper();
+            return mapper.Map<Ticket, TicketDto>(DB.TicketRepository.Get(id.Value));
         }
 
         public IEnumerable<TicketDto> GetTickets()
