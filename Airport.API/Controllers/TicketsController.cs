@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Airport.BLL.Interfaces;
 using Airport.Shared.DTO;
@@ -19,53 +20,72 @@ namespace Airport.API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(ticketService.GetAll());
+             IEnumerable<TicketDto> ticketDto;
+
+            try
+            {
+                ticketDto = ticketService.GetAll();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Type = ex.GetType().Name, Message = ex.Message });
+            }
+
+            return Ok(ticketDto);
         }
 
         // GET: api/tickets/:id
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
-            var item = ticketService.Get(id);
+            TicketDto ticketDto;
 
-            if (item == null)
+            try
             {
-                return NotFound();
+                ticketDto = ticketService.Get(id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Type = ex.GetType().Name, Message = ex.Message });
             }
 
-            return Ok(item);
+            return Ok(ticketDto);
         }
 
         // POST api/tickets
         [HttpPost]
-        public IActionResult Post([FromBody]TicketDto item)
+        public IActionResult Post([FromBody]TicketDto ticketDto)
         {
+            TicketDto resultDto;
+
             try
             {
-                ticketService.Create(item);
+                resultDto = ticketService.Create(ticketDto);
             }
             catch (Exception ex)
             {
-                return BadRequest(new { Type = nameof(ex), Message = "Can`t create ticket" });
+                return BadRequest(new { Type = ex.GetType().Name, Message = ex.Message });
             }
 
-            return Ok();
+            return Ok(resultDto);
         }
 
         // PUT api/tickets
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody]TicketDto item)
+        public IActionResult Put(Guid id, [FromBody]TicketDto ticketDto)
         {
+            TicketDto resultDto;
+
             try
             {
-                ticketService.Update(id, item);
+                resultDto = ticketService.Update(id, ticketDto);
             }
             catch (Exception ex)
             {
-                return BadRequest(new { Type = nameof(ex), Message = "Can`t update ticket" });
+                return BadRequest(new { Type = ex.GetType().Name, Message = ex.Message });
             }
 
-            return Ok();
+            return Ok(resultDto);
         }
 
         [HttpDelete]
@@ -77,7 +97,7 @@ namespace Airport.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { Type = nameof(ex), Message = "Can`t delete tickets" });
+                return BadRequest(new { Type = ex.GetType().Name, Message = ex.Message });
             }
             
             return NoContent();
@@ -93,7 +113,7 @@ namespace Airport.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { Type = nameof(ex), Message = "Can`t delete tickets" });
+                return BadRequest(new { Type = ex.GetType().Name, Message = ex.Message });
             }
 
             return NoContent();
