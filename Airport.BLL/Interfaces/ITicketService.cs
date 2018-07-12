@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Shared.DTO;
+using Airport.Shared.DTO;
 
 namespace Airport.BLL.Interfaces
 {

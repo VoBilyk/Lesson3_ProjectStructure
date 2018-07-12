@@ -5,7 +5,7 @@ using AutoMapper;
 using Airport.BLL.Interfaces;
 using Airport.DAL.Interfaces;
 using Airport.DAL.Models;
-using Shared.DTO;
+using Airport.Shared.DTO;
 
 namespace Airport.BLL.Services
 {
