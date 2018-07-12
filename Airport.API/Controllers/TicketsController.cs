@@ -56,6 +56,11 @@ namespace Airport.API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]TicketDto ticketDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { ErrorMessage = ModelState });
+            }
+
             TicketDto resultDto;
 
             try
@@ -74,6 +79,11 @@ namespace Airport.API.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(Guid id, [FromBody]TicketDto ticketDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { ErrorMessage = ModelState });
+            }
+
             TicketDto resultDto;
 
             try
