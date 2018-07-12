@@ -9,9 +9,9 @@ namespace Airport.BLL.Interfaces
 
         IEnumerable<TDto> GetAll();
 
-        void Create(TDto dto);
+        TDto Create(TDto dto);
 
-        void Update(TDto dto);
+        TDto Update(Guid? id, TDto dto);
 
         void Delete(Guid? id);
 

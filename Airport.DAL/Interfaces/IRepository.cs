@@ -9,9 +9,9 @@ namespace Airport.DAL.Interfaces
 
         TEntity Get(Guid id);
 
-        void Create(TEntity item);
+        TEntity Create(TEntity item);
 
-        void Update(TEntity item);
+        TEntity Update(TEntity item);
 
         void Delete(Guid id);
 

@@ -4,11 +4,11 @@ using Airport.DAL.Interfaces;
 
 namespace Airport.DAL.Repositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : IEntity
+    public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : IEntity
     {
-        private readonly List<TEntity> db;
+        public readonly List<TEntity> db;
 
-        public Repository(List<TEntity> context)
+        public GenericRepository(List<TEntity> context)
         {
             this.db = context;
         }
@@ -30,7 +30,7 @@ namespace Airport.DAL.Repositories
             return db;
         }
 
-        public void Create(TEntity item)
+        public TEntity Create(TEntity item)
         {
             var foundedItem = db.Find(i => i.Id == item.Id);
 
@@ -40,9 +40,11 @@ namespace Airport.DAL.Repositories
             }
 
             db.Add(item);
+
+            return db.Find(i => i.Id == item.Id);
         }
 
-        public void Update(TEntity item)
+        public TEntity Update(TEntity item)
         {
             var foundedItem = db.Find(t => t.Id == item.Id);
 
@@ -55,6 +57,8 @@ namespace Airport.DAL.Repositories
             {
                 throw new ArgumentException("Id don`t exists");
             }
+
+            return db.Find(i => i.Id == item.Id);
         }
 
         public void Delete(Guid id)

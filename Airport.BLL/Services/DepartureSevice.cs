@@ -33,7 +33,7 @@ namespace Airport.BLL.Services
             throw new NotImplementedException();
         }
 
-        public void UpdateTicket(DepartureDto dto)
+        public void Update(DepartureDto dto)
         {
             throw new NotImplementedException();
         }

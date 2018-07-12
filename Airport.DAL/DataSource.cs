@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Airport.DAL.Interfaces;
 using Airport.DAL.Models;
 
 namespace Airport.DAL
@@ -8,6 +9,23 @@ namespace Airport.DAL
     public class DataSource
     {
         static List<Ticket> tickets = new List<Ticket> { new Ticket { Id = Guid.NewGuid(), Price = 49.90M } };
+        static List<Pilot> pilots = new List<Pilot> { new Pilot { Id = Guid.NewGuid(), FirstName = "Jonh"  } };
+
+
+
+        public List<TEntity> SetOf<TEntity>() where TEntity : IEntity
+        {
+            if (tickets is List<TEntity>)
+            {
+                return tickets as List<TEntity>;
+            }
+            else if(pilots is List<TEntity>)
+            {
+                return pilots as List<TEntity>;
+            }
+
+            return null;
+        }
 
         public List<Ticket> Tickets => tickets;
 

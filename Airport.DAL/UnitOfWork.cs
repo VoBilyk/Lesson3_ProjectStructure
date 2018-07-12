@@ -8,14 +8,14 @@ namespace Airport.DAL
     {
         private DataSource db = new DataSource();
 
-        private Repository<Ticket> ticketRepository;
-        private Repository<Aeroplane> aeroplaneRepository;
-        private Repository<AeroplaneType> aeroplaneTypeRepositiry;
-        private Repository<Crew> crewRepositiry;
-        private Repository<Departure> departureRepository;
-        private Repository<Flight> flightRepository;
-        private Repository<Pilot> pilotRepository;
-        private Repository<Stewardess> stewardessRepository;
+        private TicketRepository ticketRepository;
+        private AeroplaneRepository aeroplaneRepository;
+        private AeroplaneTypeRepository aeroplaneTypeRepositiry;
+        private CrewRepository crewRepositiry;
+        private DepartureRepository departureRepository;
+        private FlightRepository flightRepository;
+        private PilotRepository pilotRepository;
+        private StewardessRepository stewardessRepository;
         
 
         public IRepository<Ticket> TicketRepository
@@ -24,7 +24,7 @@ namespace Airport.DAL
             {
                 if (this.ticketRepository == null)
                 {
-                    this.ticketRepository = new Repository<Ticket>(db.Tickets);
+                    this.ticketRepository = new TicketRepository(db.Tickets);
                 }
                 return ticketRepository;
             }
@@ -36,7 +36,7 @@ namespace Airport.DAL
             {
                 if (this.aeroplaneRepository == null)
                 {
-                    this.aeroplaneRepository = new Repository<Aeroplane>(db.Aeroplanes);
+                    this.aeroplaneRepository = new AeroplaneRepository(db.Aeroplanes);
                 }
                 return aeroplaneRepository;
             }
@@ -48,7 +48,7 @@ namespace Airport.DAL
             {
                 if (this.aeroplaneTypeRepositiry == null)
                 {
-                    this.aeroplaneTypeRepositiry = new Repository<AeroplaneType>(db.AeroplaneTypes);
+                    this.aeroplaneTypeRepositiry = new AeroplaneTypeRepository(db.AeroplaneTypes);
                 }
                 return aeroplaneTypeRepositiry;
             }
@@ -60,7 +60,7 @@ namespace Airport.DAL
             {
                 if (this.crewRepositiry == null)
                 {
-                    this.crewRepositiry = new Repository<Crew>(db.Crews);
+                    this.crewRepositiry = new CrewRepository(db.Crews);
                 }
                 return crewRepositiry;
             }
@@ -72,7 +72,7 @@ namespace Airport.DAL
             {
                 if (this.departureRepository == null)
                 {
-                    this.departureRepository = new Repository<Departure>(db.Departures);
+                    this.departureRepository = new DepartureRepository(db.Departures);
                 }
                 return departureRepository;
             }
@@ -84,7 +84,7 @@ namespace Airport.DAL
             {
                 if (this.flightRepository == null)
                 {
-                    this.flightRepository = new Repository<Flight>(db.Flights);
+                    this.flightRepository = new FlightRepository(db.Flights);
                 }
                 return flightRepository;
             }
@@ -96,7 +96,7 @@ namespace Airport.DAL
             {
                 if (this.pilotRepository == null)
                 {
-                    this.pilotRepository = new Repository<Pilot>(db.Pilots);
+                    this.pilotRepository = new PilotRepository(db.Pilots);
                 }
                 return pilotRepository;
             }
@@ -108,7 +108,7 @@ namespace Airport.DAL
             {
                 if (this.stewardessRepository == null)
                 {
-                    this.stewardessRepository = new Repository<Stewardess>(db.Stewardesses);
+                    this.stewardessRepository = new StewardessRepository(db.Stewardesses);
                 }
                 return stewardessRepository;
             }

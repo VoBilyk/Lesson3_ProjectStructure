@@ -12,7 +12,7 @@ namespace Airport.BLL.Services
     {
         IUnitOfWork DB { get; set; }
 
-        public TicketService(IUnitOfWork uow)
+        public TicketService(IUnitOfWork uow, IMapper mapper)
         {
             DB = uow;
         }
@@ -52,12 +52,16 @@ namespace Airport.BLL.Services
             return mapper.Map<IEnumerable<Ticket>, List<TicketDto>>(DB.TicketRepository.GetAll());
         }
 
-        public void Create(TicketDto dto)
+        public TicketDto Create(TicketDto ticketDto)
         {
-            throw new NotImplementedException();
+            ticketDto.Id = Guid.NewGuid();
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Ticket, TicketDto>()).CreateMapper();
+            var ticket = mapper.Map<TicketDto, Ticket>(ticketDto);
+            DB.TicketRepository.Create(ticket);
         }
 
-        public void Update(TicketDto dto)
+        public TicketDto Update(Guid? id, TicketDto dto)
         {
             throw new NotImplementedException();
         }
