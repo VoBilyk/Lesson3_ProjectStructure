@@ -13,8 +13,4 @@
     <ProjectReference Include="..\Airport.Shared\Airport.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
-
 </Project>

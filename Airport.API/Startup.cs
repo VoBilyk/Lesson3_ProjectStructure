@@ -8,11 +8,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using AutoMapper;
 using Airport.DAL;
 using Airport.DAL.Interfaces;
+using Airport.DAL.Models;
 using Airport.BLL.Interfaces;
 using Airport.BLL.Services;
 using Airport.Shared.DTO;
+
 
 namespace Airport.API
 {
@@ -34,7 +37,8 @@ namespace Airport.API
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IService<TicketDto>, TicketService>();
 
-            //services.AddScoped(typeof(IAutoMapConverter<,>), typeof(AutoMapConverter<,>));
+            var mapper = MapperConfiguration().CreateMapper();
+            services.AddScoped(_ => mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +50,38 @@ namespace Airport.API
             }
 
             app.UseMvc();
+        }
+
+        public MapperConfiguration MapperConfiguration()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Aeroplane, AeroplaneDto>();
+                cfg.CreateMap<AeroplaneDto, Aeroplane>();
+
+                cfg.CreateMap<AeroplaneType, AeroplaneTypeDto>();
+                cfg.CreateMap<AeroplaneTypeDto, AeroplaneType>();
+
+                cfg.CreateMap<Crew, CrewDto>();
+                cfg.CreateMap<CrewDto, Crew>();
+
+                cfg.CreateMap<Departure, DepartureDto>();
+                cfg.CreateMap<DepartureDto, Departure>();
+
+                cfg.CreateMap<Flight, FlightDto>();
+                cfg.CreateMap<FlightDto, Flight>();
+
+                cfg.CreateMap<Pilot, PilotDto>();
+                cfg.CreateMap<PilotDto, Pilot>();
+
+                cfg.CreateMap<Stewardess, StewardessDto>();
+                cfg.CreateMap<StewardessDto, Stewardess>();
+
+                cfg.CreateMap<Ticket, TicketDto>();
+                cfg.CreateMap<TicketDto, Ticket>();
+            });
+
+            return config;
         }
     }
 }
