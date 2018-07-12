@@ -12,8 +12,8 @@ namespace Airport.API.Controllers
     [Route("api/[controller]")]
     public class TicketsController : Controller
     {
-        ITicketService ticketService;
-        public TicketsController(ITicketService ticketService)
+        IService<TicketDto> ticketService;
+        public TicketsController(IService<TicketDto> ticketService)
         {
             this.ticketService = ticketService;
         }
@@ -22,14 +22,14 @@ namespace Airport.API.Controllers
         [HttpGet]
         public IEnumerable<TicketDto> Get()
         {
-            return ticketService.GetTickets();
+            return ticketService.GetAll();
         }
 
         // GET: api/tickets/:id
         [HttpGet("{id}")]
         public TicketDto Get(Guid? id)
         {
-            return ticketService.GetTicket(id);
+            return ticketService.Get(id);
         }
 
         // POST api/values

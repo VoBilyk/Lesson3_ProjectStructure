@@ -8,33 +8,13 @@ using Airport.Shared.DTO;
 
 namespace Airport.BLL.Services
 {
-    public class TicketService : ITicketService
+    public class TicketService : IService<TicketDto>
     {
         IUnitOfWork DB { get; set; }
 
         public TicketService(IUnitOfWork uow)
         {
             DB = uow;
-        }
-
-
-        public TicketDto GetTicket(Guid? id)
-        {
-            if (!id.HasValue)
-            {
-                throw new ArgumentNullException();
-            }
-
-            //var mapper = Configuration.MapperConfiguration().CreateMapper();
-            //return mapper.Map<Ticket, TicketDto>(DB.TicketRepository.Get(id.Value));
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Ticket, TicketDto>()).CreateMapper();
-            return mapper.Map<Ticket, TicketDto>(DB.TicketRepository.Get(id.Value));
-        }
-
-        public IEnumerable<TicketDto> GetTickets()
-        {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Ticket, TicketDto>()).CreateMapper();
-            return mapper.Map<IEnumerable<Ticket>, List<TicketDto>>(DB.TicketRepository.GetAll());
         }
 
         public void CreateTicket(TicketDto ticketDto)
@@ -51,6 +31,45 @@ namespace Airport.BLL.Services
             }
 
             DB.TicketRepository.Create(ticket);
+        }
+
+        public TicketDto Get(Guid? id)
+        {
+            if (!id.HasValue)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var mapper = Configuration.MapperConfiguration().CreateMapper();
+            return mapper.Map<Ticket, TicketDto>(DB.TicketRepository.Get(id.Value));
+            //var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Ticket, TicketDto>()).CreateMapper();
+            //return mapper.Map<Ticket, TicketDto>(DB.TicketRepository.Get(id.Value));
+        }
+
+        public IEnumerable<TicketDto> GetAll()
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Ticket, TicketDto>()).CreateMapper();
+            return mapper.Map<IEnumerable<Ticket>, List<TicketDto>>(DB.TicketRepository.GetAll());
+        }
+
+        public void Create(TicketDto dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateTicket(TicketDto dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Guid? id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

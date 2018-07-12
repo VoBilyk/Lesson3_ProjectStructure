@@ -12,6 +12,7 @@ using Airport.DAL;
 using Airport.DAL.Interfaces;
 using Airport.BLL.Interfaces;
 using Airport.BLL.Services;
+using Airport.Shared.DTO;
 
 namespace Airport.API
 {
@@ -31,7 +32,7 @@ namespace Airport.API
 
             //Instance injection
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<ITicketService, TicketService>();
+            services.AddScoped<IService<TicketDto>, TicketService>();
 
             //services.AddScoped(typeof(IAutoMapConverter<,>), typeof(AutoMapConverter<,>));
         }
