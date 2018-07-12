@@ -42,26 +42,30 @@ namespace Airport.API.Controllers
         {
             try
             {
-                return Ok(ticketService.Create(item));
+                ticketService.Create(item);
             }
             catch (Exception ex)
             {
                 return BadRequest(new { Type = nameof(ex), Message = "Can`t create ticket" });
             }
+
+            return Ok();
         }
 
         // PUT api/tickets
         [HttpPut("{id}")]
-        public void Put(Guid? id, [FromBody]TicketDto item)
+        public IActionResult Put(Guid? id, [FromBody]TicketDto item)
         {
             try
             {
-                return Ok(ticketService.Update(item));
+                ticketService.Update(item);
             }
             catch (Exception ex)
             {
                 return BadRequest(new { Type = nameof(ex), Message = "Can`t update ticket" });
             }
+
+            return Ok();
         }
 
         [HttpDelete]

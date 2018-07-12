@@ -57,19 +57,19 @@ namespace Airport.BLL.Services
             throw new NotImplementedException();
         }
 
-        public void UpdateTicket(TicketDto dto)
+        public void Update(TicketDto dto)
         {
             throw new NotImplementedException();
         }
 
         public void Delete(Guid? id)
         {
-            throw new NotImplementedException();
+            DB.TicketRepository.Delete(id.Value);
         }
 
         public void DeleteAll()
         {
-            throw new NotImplementedException();
+            DB.TicketRepository.Delete();
         }
     }
 }

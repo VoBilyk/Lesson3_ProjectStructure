@@ -15,7 +15,14 @@ namespace Airport.DAL.Repositories
 
         public TEntity Get(Guid id)
         {
-            return db.Find(t => t.Id == id);
+            var foundedItem = db.Find(t => t.Id == id);
+
+            if (foundedItem == null)
+            {
+                throw new ArgumentException("Id don`t exists");
+            }
+
+            return foundedItem;
         }
 
         public IEnumerable<TEntity> GetAll()
@@ -25,23 +32,40 @@ namespace Airport.DAL.Repositories
 
         public void Create(TEntity item)
         {
+            var foundedItem = db.Find(i => i.Id == item.Id);
+
+            if (foundedItem == null)
+            {
+                throw new ArgumentException("Item has alredy exist");
+            }
+
             db.Add(item);
         }
 
         public void Update(TEntity item)
         {
-            var ticket = db.Find(t => t.Id == item.Id);
+            var foundedItem = db.Find(t => t.Id == item.Id);
 
-            if (ticket != null)
+            if (foundedItem != null)
             {
-                db.Remove(ticket);
+                db.Remove(foundedItem);
                 db.Add(item);
+            }
+            else
+            {
+                throw new ArgumentException("Id don`t exists");
             }
         }
 
         public void Delete(Guid id)
         {
             var ticket = db.Find(item => item.Id == id);
+
+            if (ticket == null)
+            {
+                throw new ArgumentException("Id don`t exists");
+            }
+
             db.Remove(ticket);
         }
 
