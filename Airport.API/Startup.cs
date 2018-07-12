@@ -31,6 +31,7 @@ namespace Airport.API
 
             //Instance injection
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ITicketService, ITicketService>();
 
             //services.AddScoped(typeof(IAutoMapConverter<,>), typeof(AutoMapConverter<,>));
         }
