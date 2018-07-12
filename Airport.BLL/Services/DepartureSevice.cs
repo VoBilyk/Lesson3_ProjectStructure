@@ -1,41 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using AutoMapper;
 using Airport.BLL.Interfaces;
+using Airport.DAL.Interfaces;
+using Airport.DAL.Models;
 using Airport.Shared.DTO;
+
 
 namespace Airport.BLL.Services
 {
     public class DepartureService : IService<DepartureDto>
     {
-        public void Create(DepartureDto dto)
+        private IUnitOfWork db;
+        private IMapper mapper;
+
+        public DepartureService(IUnitOfWork uow, IMapper mapper)
         {
-            throw new NotImplementedException();
+            this.db = uow;
+            this.mapper = mapper;
         }
 
-        public void Delete(Guid? id)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void DeleteAll()
+        public DepartureDto Get(Guid id)
         {
-            throw new NotImplementedException();
-        }
-
-        public DepartureDto Get(Guid? id)
-        {
-            throw new NotImplementedException();
+            return mapper.Map<Departure, DepartureDto>(db.DepartureRepository.Get(id));
         }
 
         public IEnumerable<DepartureDto> GetAll()
         {
-            throw new NotImplementedException();
+            return mapper.Map<IEnumerable<Departure>, IEnumerable<DepartureDto>>(db.DepartureRepository.GetAll());
         }
 
-        public void Update(DepartureDto dto)
+        public DepartureDto Create(DepartureDto departureDto)
         {
-            throw new NotImplementedException();
+            departureDto.Id = Guid.NewGuid();
+            var departure = mapper.Map<DepartureDto, Departure>(departureDto);
+            var resultDeparture = db.DepartureRepository.Create(departure);
+
+            return mapper.Map<Departure, DepartureDto>(resultDeparture);
+        }
+
+        public DepartureDto Update(Guid id, DepartureDto departureDto)
+        {
+            departureDto.Id = id;
+            var departure = mapper.Map<DepartureDto, Departure>(departureDto);
+            var resultDeparture = db.DepartureRepository.Update(departure);
+
+            return mapper.Map<Departure, DepartureDto>(resultDeparture);
+        }
+
+        public void Delete(Guid id)
+        {
+            db.DepartureRepository.Delete(id);
+        }
+
+        public void DeleteAll()
+        {
+            db.DepartureRepository.Delete();
         }
     }
 }

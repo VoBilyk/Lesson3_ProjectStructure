@@ -24,7 +24,7 @@ namespace Airport.API.Controllers
 
         // GET: api/tickets/:id
         [HttpGet("{id}")]
-        public IActionResult Get(Guid? id)
+        public IActionResult Get(Guid id)
         {
             var item = ticketService.Get(id);
 
@@ -54,11 +54,11 @@ namespace Airport.API.Controllers
 
         // PUT api/tickets
         [HttpPut("{id}")]
-        public IActionResult Put(Guid? id, [FromBody]TicketDto item)
+        public IActionResult Put(Guid id, [FromBody]TicketDto item)
         {
             try
             {
-                ticketService.Update(item);
+                ticketService.Update(id, item);
             }
             catch (Exception ex)
             {
@@ -85,7 +85,7 @@ namespace Airport.API.Controllers
 
         // DELETE api/tickets/:id
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid? id)
+        public IActionResult Delete(Guid id)
         {
             try
             {

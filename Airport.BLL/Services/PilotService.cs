@@ -1,41 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using AutoMapper;
 using Airport.BLL.Interfaces;
+using Airport.DAL.Interfaces;
+using Airport.DAL.Models;
 using Airport.Shared.DTO;
 
 namespace Airport.BLL.Services
 {
     public class PilotService : IService<PilotDto>
     {
-        public void Create(PilotDto dto)
+        private IUnitOfWork db;
+        private IMapper mapper;
+
+        public PilotService(IUnitOfWork uow, IMapper mapper)
         {
-            throw new NotImplementedException();
+            this.db = uow;
+            this.mapper = mapper;
         }
 
-        public void Delete(Guid? id)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void DeleteAll()
+        public PilotDto Get(Guid id)
         {
-            throw new NotImplementedException();
-        }
-
-        public PilotDto Get(Guid? id)
-        {
-            throw new NotImplementedException();
+            return mapper.Map<Pilot, PilotDto>(db.PilotRepositiry.Get(id));
         }
 
         public IEnumerable<PilotDto> GetAll()
         {
-            throw new NotImplementedException();
+            return mapper.Map<IEnumerable<Pilot>, IEnumerable<PilotDto>>(db.PilotRepositiry.GetAll());
         }
 
-        public void Update(PilotDto dto)
+        public PilotDto Create(PilotDto pilotDto)
         {
-            throw new NotImplementedException();
+            pilotDto.Id = Guid.NewGuid();
+            var pilot = mapper.Map<PilotDto, Pilot>(pilotDto);
+            var resultPilot = db.PilotRepositiry.Create(pilot);
+
+            return mapper.Map<Pilot, PilotDto>(resultPilot);
+        }
+
+        public PilotDto Update(Guid id, PilotDto pilotDto)
+        {
+            pilotDto.Id = id;
+            var pilot = mapper.Map<PilotDto, Pilot>(pilotDto);
+            var resultPilot = db.PilotRepositiry.Update(pilot);
+
+            return mapper.Map<Pilot, PilotDto>(resultPilot);
+        }
+
+        public void Delete(Guid id)
+        {
+            db.PilotRepositiry.Delete(id);
+        }
+
+        public void DeleteAll()
+        {
+            db.PilotRepositiry.Delete();
         }
     }
 }

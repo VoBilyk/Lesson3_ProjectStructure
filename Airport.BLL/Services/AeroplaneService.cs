@@ -2,40 +2,61 @@
 using System.Collections.Generic;
 using System.Text;
 using Airport.BLL.Interfaces;
+using Airport.DAL.Interfaces;
+using Airport.DAL.Models;
 using Airport.Shared.DTO;
+using AutoMapper;
 
 namespace Airport.BLL.Services
 {
     public class AeroplaneService : IService<AeroplaneDto>
     {
-        public void Create(AeroplaneDto dto)
+        private IUnitOfWork db;
+        private IMapper mapper;
+
+        public AeroplaneService(IUnitOfWork uow, IMapper mapper)
         {
-            throw new NotImplementedException();
+            this.db = uow;
+            this.mapper = mapper;
         }
 
-        public void Delete(Guid? id)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void DeleteAll()
+        public AeroplaneDto Get(Guid id)
         {
-            throw new NotImplementedException();
-        }
-
-        public AeroplaneDto Get(Guid? id)
-        {
-            throw new NotImplementedException();
+            return mapper.Map<Aeroplane, AeroplaneDto>(db.AeroplaneRepository.Get(id));
         }
 
         public IEnumerable<AeroplaneDto> GetAll()
         {
-            throw new NotImplementedException();
+            return mapper.Map<IEnumerable<Aeroplane>, IEnumerable<AeroplaneDto>>(db.AeroplaneRepository.GetAll());
         }
 
-        public void Update(AeroplaneDto dto)
+        public AeroplaneDto Create(AeroplaneDto aeroplaneDto)
         {
-            throw new NotImplementedException();
+            aeroplaneDto.Id = Guid.NewGuid();
+            var aeroplane = mapper.Map<AeroplaneDto, Aeroplane>(aeroplaneDto);
+            var resultAeroplane = db.AeroplaneRepository.Create(aeroplane);
+
+            return mapper.Map<Aeroplane, AeroplaneDto>(resultAeroplane);
+        }
+
+        public AeroplaneDto Update(Guid id, AeroplaneDto aeroplaneDto)
+        {
+            aeroplaneDto.Id = id;
+            var aeroplane = mapper.Map<AeroplaneDto, Aeroplane>(aeroplaneDto);
+            var resultAeroplane = db.AeroplaneRepository.Update(aeroplane);
+
+            return mapper.Map<Aeroplane, AeroplaneDto>(resultAeroplane);
+        }
+
+        public void Delete(Guid id)
+        {
+            db.AeroplaneRepository.Delete(id);
+        }
+
+        public void DeleteAll()
+        {
+            db.AeroplaneRepository.Delete();
         }
     }
 }

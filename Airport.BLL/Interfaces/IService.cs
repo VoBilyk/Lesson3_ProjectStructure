@@ -5,15 +5,15 @@ namespace Airport.BLL.Interfaces
 {
     public interface IService<TDto>
     {
-        TDto Get(Guid? id);
+        TDto Get(Guid id);
 
         IEnumerable<TDto> GetAll();
 
         TDto Create(TDto dto);
 
-        TDto Update(Guid? id, TDto dto);
+        TDto Update(Guid id, TDto dto);
 
-        void Delete(Guid? id);
+        void Delete(Guid id);
 
         void DeleteAll();
     }
