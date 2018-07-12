@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Airport.DAL.Models;
-using Shared.DTO;
+using Airport.Shared.DTO;
 
 namespace Airport.BLL
 {

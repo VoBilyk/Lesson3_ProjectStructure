@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shared.DTO
+namespace Airport.Shared.DTO
 {
     public class AeroplaneDto
     {
