@@ -13,7 +13,7 @@ namespace Airport.DAL
 
 
 
-        public List<TEntity> SetOf<TEntity>() where TEntity : IEntity
+        public List<TEntity> SetOf<TEntity>()
         {
             if (tickets is List<TEntity>)
             {

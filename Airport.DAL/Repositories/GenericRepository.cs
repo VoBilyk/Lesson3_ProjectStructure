@@ -6,7 +6,7 @@ namespace Airport.DAL.Repositories
 {
     public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : IEntity
     {
-        public readonly List<TEntity> db;
+        private readonly List<TEntity> db;
 
         public GenericRepository(List<TEntity> context)
         {
