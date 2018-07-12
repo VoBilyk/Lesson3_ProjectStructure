@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Airport.BLL.Interfaces;
 using Airport.Shared.DTO;
@@ -20,34 +17,82 @@ namespace Airport.API.Controllers
 
         // GET: api/tickets
         [HttpGet]
-        public IEnumerable<TicketDto> Get()
+        public IActionResult Get()
         {
-            return ticketService.GetAll();
+            return Ok(ticketService.GetAll());
         }
 
         // GET: api/tickets/:id
         [HttpGet("{id}")]
-        public TicketDto Get(Guid? id)
+        public IActionResult Get(Guid? id)
         {
-            return ticketService.Get(id);
+            var item = ticketService.Get(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(item);
         }
 
-        // POST api/values
+        // POST api/tickets
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Post([FromBody]TicketDto item)
         {
+            try
+            {
+                return Ok(ticketService.Create(item));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Type = nameof(ex), Message = "Can`t create ticket" });
+            }
         }
 
-        // PUT api/values/5
+        // PUT api/tickets
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void Put(Guid? id, [FromBody]TicketDto item)
         {
+            try
+            {
+                return Ok(ticketService.Update(item));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Type = nameof(ex), Message = "Can`t update ticket" });
+            }
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        public IActionResult Delete()
         {
+            try
+            {
+                ticketService.DeleteAll();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Type = nameof(ex), Message = "Can`t delete tickets" });
+            }
+            
+            return NoContent();
+        }
+
+        // DELETE api/tickets/:id
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid? id)
+        {
+            try
+            {
+                ticketService.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Type = nameof(ex), Message = "Can`t delete tickets" });
+            }
+
+            return NoContent();
         }
     }
 }
