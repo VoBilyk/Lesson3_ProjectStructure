@@ -13,7 +13,7 @@ using Airport.DAL.Interfaces;
 using Airport.BLL;
 using Airport.BLL.Interfaces;
 
-namespace Airport.WebAPI
+namespace Airport.API
 {
     public class Startup
     {
