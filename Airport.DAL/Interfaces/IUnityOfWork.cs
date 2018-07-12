@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Airport.DAL.Interfaces
 {
-    public interface IUnityOfWork
+    public interface IUnitOfWork
     {
         void SaveChanges();
     }
