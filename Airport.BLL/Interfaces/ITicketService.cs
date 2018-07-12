@@ -9,7 +9,7 @@ namespace Airport.BLL.Interfaces
     {
         void CreateTicket(TicketDto ticketDto);
 
-        TicketDto GetTicket(int? id);
+        TicketDto GetTicket(Guid? id);
 
         IEnumerable<TicketDto> GetTickets();
     }
