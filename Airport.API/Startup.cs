@@ -8,6 +8,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Airport.DAL;
+using Airport.DAL.Interfaces;
+using Airport.BLL;
+using Airport.BLL.Interfaces;
 
 namespace Airport.WebAPI
 {
@@ -24,6 +28,11 @@ namespace Airport.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            //Instance injection
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            //services.AddScoped(typeof(IAutoMapConverter<,>), typeof(AutoMapConverter<,>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
