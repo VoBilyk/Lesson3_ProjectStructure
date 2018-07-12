@@ -8,64 +8,65 @@ using Airport.Shared.DTO;
 namespace Airport.API.Controllers
 {
     [Route("api/[controller]")]
-    public class TicketsController : Controller
+    public class PilotsController : Controller
     {
-        ITicketService ticketService;
-        public TicketsController(ITicketService ticketService)
+        IPilotService pilotService;
+
+        public PilotsController(IPilotService pilotService)
         {
-            this.ticketService = ticketService;
+            this.pilotService = pilotService;
         }
 
-        // GET: api/tickets
+        // GET: api/pilots
         [HttpGet]
         public IActionResult Get()
         {
-             IEnumerable<TicketDto> ticketDtos;
+            IEnumerable<PilotDto> pilotDtos;
 
             try
             {
-                ticketDtos = ticketService.GetAll();
+                pilotDtos = pilotService.GetAll();
             }
             catch (Exception ex)
             {
                 return BadRequest(new { ErrorType = ex.GetType().Name, ex.Message });
             }
 
-            return Ok(ticketDtos);
+            return Ok(pilotDtos);
         }
 
-        // GET: api/tickets/:id
+        // GET: api/pilots/:id
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
-            TicketDto ticketDto;
+            PilotDto pilotDto;
 
             try
             {
-                ticketDto = ticketService.Get(id);
+                pilotDto = pilotService.Get(id);
             }
             catch (Exception ex)
             {
                 return BadRequest(new { ErrorType = ex.GetType().Name, ex.Message });
             }
 
-            return Ok(ticketDto);
+            return Ok(pilotDto);
         }
 
-        // POST api/tickets
+        // POST api/pilot
         [HttpPost]
-        public IActionResult Post([FromBody]TicketDto ticketDto)
+        public IActionResult Post([FromBody]PilotDto pilotDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(new { ErrorMessage = ModelState });
             }
 
-            TicketDto resultDto;
+            PilotDto resultDto;
 
             try
             {
-                resultDto = ticketService.Create(ticketDto);
+                resultDto = pilotService.Create(pilotDto);
             }
             catch (Exception ex)
             {
@@ -75,20 +76,20 @@ namespace Airport.API.Controllers
             return Ok(resultDto);
         }
 
-        // PUT api/tickets/:id
+        // PUT api/pilot/:id
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody]TicketDto ticketDto)
+        public IActionResult Put(Guid id, [FromBody]PilotDto pilotDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(new { ErrorMessage = ModelState });
             }
 
-            TicketDto resultDto;
+            PilotDto resultDto;
 
             try
             {
-                resultDto = ticketService.Update(id, ticketDto);
+                resultDto = pilotService.Update(id, pilotDto);
             }
             catch (Exception ex)
             {
@@ -98,29 +99,29 @@ namespace Airport.API.Controllers
             return Ok(resultDto);
         }
 
-        // DELETE api/tickets
+        // DELETE api/pilots
         [HttpDelete]
         public IActionResult Delete()
         {
             try
             {
-                ticketService.DeleteAll();
+                pilotService.DeleteAll();
             }
             catch (Exception ex)
             {
                 return BadRequest(new { Type = ex.GetType().Name, ex.Message });
             }
-            
+
             return NoContent();
         }
 
-        // DELETE api/tickets/:id
+        // DELETE api/pilots/:id
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
             try
             {
-                ticketService.Delete(id);
+                pilotService.Delete(id);
             }
             catch (Exception ex)
             {
