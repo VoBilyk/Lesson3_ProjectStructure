@@ -6,7 +6,7 @@ namespace Airport.BLL
 {
     public class Configuration
     {
-        public MapperConfiguration MapperConfiguration()
+        public static MapperConfiguration MapperConfiguration()
         {
             var config = new MapperConfiguration(cfg =>
             {
