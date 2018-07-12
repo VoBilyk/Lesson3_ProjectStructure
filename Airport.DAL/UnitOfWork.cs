@@ -3,7 +3,7 @@ using Airport.DAL.Models;
 
 namespace Airport.DAL
 {
-    public class UnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private DataSource db = new DataSource();
 

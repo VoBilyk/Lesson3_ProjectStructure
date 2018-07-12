@@ -1,11 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Airport.DAL.Models;
 
 namespace Airport.DAL.Interfaces
 {
     public interface IUnitOfWork
     {
-        void SaveChanges();
+        IRepository<Ticket> TicketRepository { get; }
+
+        IRepository<Aeroplane> AeroplaneRepository { get; }
+
+        IRepository<AeroplaneType> AeroplaneTypeRepository { get; }
+
+        IRepository<Crew> CrewRepositiry { get; }
+
+        IRepository<Departure> DepartureRepository { get; }
+
+        IRepository<Flight> FlightRepository { get; }
+
+        IRepository<Pilot> PilotRepositiry { get; }
+
+        IRepository<Stewardess> StewardessRepositiry { get; }
     }
 }
