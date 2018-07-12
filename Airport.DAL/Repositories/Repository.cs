@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Airport.DAL.Interfaces;
 
-namespace Airport.DAL
+namespace Airport.DAL.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : IEntity
     {
