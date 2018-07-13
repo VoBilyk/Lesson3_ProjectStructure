@@ -61,12 +61,12 @@ namespace Airport.DAL
                 .RuleFor(o => o.DeparturePoint, f => f.Address.City())
                 .RuleFor(o => o.Destinition, f => f.Address.City())
                 .RuleFor(o => o.DepartureTime, f => f.Date.Soon(365))
-                .RuleFor(o => o.ArrivalTime, (f, o) => o.DepartureTime + f.Date.Timespan(new TimeSpan(60000)));
+                .RuleFor(o => o.ArrivalTime, (f, o) => o.DepartureTime + f.Date.Timespan(new TimeSpan(8,0,0)));
 
             var ticketFaker = new Faker<Ticket>()
                 .RuleFor(o => o.Id, f => Guid.NewGuid())
                 .RuleFor(o => o.Price, f => f.Random.Number(20, 100))
-                .RuleFor(o => o.FlightId, f => f.PickRandom(flights).Id);
+                .RuleFor(o => o.Flight, f => f.PickRandom(flights));
 
 
             // Generating date
@@ -82,7 +82,7 @@ namespace Airport.DAL
             // Connecting tickets to flight
             foreach (var flight in flights)
             {
-                flight.Tickets = tickets.Where(t => t.FlightId == flight.Id).ToList();
+                flight.Tickets = tickets.Where(t => t.Flight.Id == flight.Id).ToList();
             }
         }
 

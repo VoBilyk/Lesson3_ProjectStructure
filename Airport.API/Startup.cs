@@ -73,28 +73,34 @@ namespace Airport.API
                 cfg.CreateMap<Stewardess, StewardessDto>();
                 cfg.CreateMap<StewardessDto, Stewardess>();
 
-                cfg.CreateMap<AeroplaneDto, Aeroplane>();
+                cfg.CreateMap<AeroplaneDto, Aeroplane>()
+                    .ForMember(model => model.AeroplaneType, dto => dto.Ignore());
                 cfg.CreateMap<Aeroplane, AeroplaneDto>()
-                 .ForMember(dto => dto.AeroplaneTypeId, model => model.MapFrom(m => m.AeroplaneType.Id));
+                    .ForMember(dto => dto.AeroplaneTypeId, model => model.MapFrom(m => m.AeroplaneType.Id));
 
-                cfg.CreateMap<CrewDto, Crew>();
+                cfg.CreateMap<CrewDto, Crew>()
+                    .ForMember(model => model.Pilot, dto => dto.Ignore())
+                    .ForMember(model => model.Stewardesses, dto => dto.Ignore());
                 cfg.CreateMap<Crew, CrewDto>()
-                 .ForMember(dto => dto.PilotId, model => model.MapFrom(m => m.Pilot.Id))
-                 .ForMember(dto => dto.StewardessesId, model => model.MapFrom(m => m.Stewardesses.Select(s => s.Id)));
+                    .ForMember(dto => dto.PilotId, model => model.MapFrom(m => m.Pilot.Id))
+                    .ForMember(dto => dto.StewardessesId, model => model.MapFrom(m => m.Stewardesses.Select(s => s.Id)));
 
-                cfg.CreateMap<DepartureDto, Departure>();
+                cfg.CreateMap<DepartureDto, Departure>()
+                    .ForMember(model => model.Airplane, dto => dto.Ignore())
+                    .ForMember(model => model.Crew, dto => dto.Ignore());
                 cfg.CreateMap<Departure, DepartureDto>()
-                 .ForMember(dto => dto.AirplaneId, model => model.MapFrom(m => m.Airplane.Id))
-                 .ForMember(dto => dto.CrewId, model => model.MapFrom(m => m.Crew.Id));
+                    .ForMember(dto => dto.AirplaneId, model => model.MapFrom(m => m.Airplane.Id))
+                    .ForMember(dto => dto.CrewId, model => model.MapFrom(m => m.Crew.Id));
 
-
-                cfg.CreateMap<FlightDto, Flight>();
+                cfg.CreateMap<FlightDto, Flight>()
+                    .ForMember(model => model.Tickets, dto => dto.Ignore());
                 cfg.CreateMap<Flight, FlightDto>()
-                 .ForMember(dto => dto.TicketsId, model => model.MapFrom(m => m.Tickets.Select(t => t.Id)));
+                    .ForMember(dto => dto.TicketsId, model => model.MapFrom(m => m.Tickets.Select(t => t.Id)));
 
-                cfg.CreateMap<TicketDto, Ticket>();
+                cfg.CreateMap<TicketDto, Ticket>()
+                    .ForMember(model => model.Flight, dto => dto.Ignore());
                 cfg.CreateMap<Ticket, TicketDto>()
-                 .ForMember(dto => dto.FlightId, model => model.MapFrom(m => m.Flight.Id));
+                    .ForMember(dto => dto.FlightId, model => model.MapFrom(m => m.Flight.Id));
             });
 
             return config;

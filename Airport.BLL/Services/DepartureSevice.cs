@@ -31,24 +31,24 @@ namespace Airport.BLL.Services
             return mapper.Map<List<Departure>, List<DepartureDto>>(db.DepartureRepository.GetAll());
         }
 
-        public DepartureDto Create(DepartureDto departureDto)
+        public void Create(DepartureDto departureDto)
         {
             var departure = mapper.Map<DepartureDto, Departure>(departureDto);
             departure.Id = Guid.NewGuid();
             departure.Crew = db.CrewRepositiry.Get(departureDto.CrewId);
             departure.Airplane = db.AeroplaneRepository.Get(departureDto.AirplaneId);
 
-            return mapper.Map<Departure, DepartureDto>(db.DepartureRepository.Create(departure));
+            db.DepartureRepository.Create(departure);
         }
 
-        public DepartureDto Update(Guid id, DepartureDto departureDto)
+        public void Update(Guid id, DepartureDto departureDto)
         {
             var departure = mapper.Map<DepartureDto, Departure>(departureDto);
             departure.Id = id;
             departure.Airplane = db.AeroplaneRepository.Get(departureDto.AirplaneId);
             departure.Crew = db.CrewRepositiry.Get(departureDto.CrewId);
 
-            return mapper.Map<Departure, DepartureDto>(db.DepartureRepository.Update(departure));
+            db.DepartureRepository.Update(departure);
         }
 
         public void Delete(Guid id)

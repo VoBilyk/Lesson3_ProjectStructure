@@ -32,22 +32,22 @@ namespace Airport.BLL.Services
             return mapper.Map<List<Flight>, List<FlightDto>>(db.FlightRepository.GetAll());
         }
 
-        public FlightDto Create(FlightDto flightDto)
+        public void Create(FlightDto flightDto)
         {
             var flight = mapper.Map<FlightDto, Flight>(flightDto);
             flight.Id = Guid.NewGuid();
             flight.Tickets = db.TicketRepository.GetAll().Where(i => flightDto.TicketsId.Contains(i.Id)).ToList();
 
-            return mapper.Map<Flight, FlightDto>(db.FlightRepository.Create(flight));
+            db.FlightRepository.Create(flight);
         }
 
-        public FlightDto Update(Guid id, FlightDto flightDto)
+        public void Update(Guid id, FlightDto flightDto)
         {
             var flight = mapper.Map<FlightDto, Flight>(flightDto);
             flight.Id = id;
             flight.Tickets = db.TicketRepository.GetAll().Where(i => flightDto.TicketsId.Contains(i.Id)).ToList();
             
-            return mapper.Map<Flight, FlightDto>(db.FlightRepository.Update(flight));
+            db.FlightRepository.Update(flight);
         }
 
         public void Delete(Guid id)

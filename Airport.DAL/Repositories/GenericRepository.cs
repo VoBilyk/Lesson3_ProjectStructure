@@ -19,7 +19,7 @@ namespace Airport.DAL.Repositories
 
             if(item == null)
             {
-                throw new ArgumentException("Can`t find item");
+                throw new ArgumentException($"Can`t find item by id:{id}");
             }
 
             return item;
@@ -30,7 +30,7 @@ namespace Airport.DAL.Repositories
             return db;
         }
 
-        public TEntity Create(TEntity item)
+        public void Create(TEntity item)
         {
             var foundedItem = db.Find(i => i.Id == item.Id);
 
@@ -40,11 +40,9 @@ namespace Airport.DAL.Repositories
             }
 
             db.Add(item);
-
-            return db.Find(i => i.Id == item.Id);
         }
 
-        public TEntity Update(TEntity item)
+        public void Update(TEntity item)
         {
             var foundedItem = db.Find(t => t.Id == item.Id);
 
@@ -55,8 +53,6 @@ namespace Airport.DAL.Repositories
 
             db.Remove(foundedItem);
             db.Add(item);
-
-            return db.Find(i => i.Id == item.Id);
         }
 
         public void Delete(Guid id)

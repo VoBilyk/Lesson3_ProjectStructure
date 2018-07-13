@@ -59,21 +59,19 @@ namespace Airport.API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new { ErrorMessage = ModelState });
+                return BadRequest(new { Type = "ValidationError", ErrorMessage = "Required fields is empty" });
             }
-
-            CrewDto resultDto;
-
+            
             try
             {
-                resultDto = crewService.Create(crewDto);
+                crewService.Create(crewDto);
             }
             catch (Exception ex)
             {
                 return BadRequest(new { ErrorType = ex.GetType().Name, ex.Message });
             }
 
-            return Ok(resultDto);
+            return Ok();
         }
 
         // PUT api/crews/:id
@@ -82,14 +80,15 @@ namespace Airport.API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new { ErrorMessage = ModelState });
+                return BadRequest(new { Type = "ValidationError", ErrorMessage = "Required fields is empty" });
             }
 
             CrewDto resultDto;
 
             try
             {
-                resultDto = crewService.Update(id, crewDto);
+                crewService.Update(id, crewDto);
+                resultDto = crewService.Get(id);
             }
             catch (Exception ex)
             {

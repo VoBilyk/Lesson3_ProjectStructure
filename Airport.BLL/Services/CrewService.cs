@@ -31,7 +31,7 @@ namespace Airport.BLL.Services
             return mapper.Map<List<Crew>, List<CrewDto>>(db.CrewRepositiry.GetAll());
         }
 
-        public CrewDto Create(CrewDto crewDto)
+        public void Create(CrewDto crewDto)
         {
             var crew = mapper.Map<CrewDto, Crew>(crewDto);
 
@@ -39,10 +39,10 @@ namespace Airport.BLL.Services
             crew.Pilot = db.PilotRepositiry.Get(crewDto.PilotId);
             crew.Stewardesses = db.StewardessRepositiry.GetAll().Where(i => crewDto.StewardessesId.Contains(i.Id)).ToList();
             
-            return mapper.Map<Crew, CrewDto>(db.CrewRepositiry.Create(crew));
+            db.CrewRepositiry.Create(crew);
         }
 
-        public CrewDto Update(Guid id, CrewDto crewDto)
+        public void Update(Guid id, CrewDto crewDto)
         {
             var crew = mapper.Map<CrewDto, Crew>(crewDto);
 
@@ -50,7 +50,7 @@ namespace Airport.BLL.Services
             crew.Pilot = db.PilotRepositiry.Get(crewDto.PilotId);
             crew.Stewardesses = db.StewardessRepositiry.GetAll().Where(i => crewDto.StewardessesId.Contains(i.Id)).ToList();
 
-            return mapper.Map<Crew, CrewDto>(db.CrewRepositiry.Update(crew));
+            db.CrewRepositiry.Update(crew);
         }
 
         public void Delete(Guid id)

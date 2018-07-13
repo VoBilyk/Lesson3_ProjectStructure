@@ -21,6 +21,7 @@ namespace Airport.Shared.DTO
         [Required]
         public DateTime DepartureTime { get; set; }
 
+        [Required]
         public List<Guid> TicketsId { get; set; }
     }
 }
