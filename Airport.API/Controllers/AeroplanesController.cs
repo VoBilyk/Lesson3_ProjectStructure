@@ -8,65 +8,65 @@ using Airport.Shared.DTO;
 namespace Airport.API.Controllers
 {
     [Route("api/[controller]")]
-    public class PilotsController : Controller
+    public class AeroplanesController : Controller
     {
-        private IPilotService pilotService;
+        private IAeroplaneService aeroplaneService;
 
-        public PilotsController(IPilotService pilotService)
+        public AeroplanesController(IAeroplaneService aeroplaneService)
         {
-            this.pilotService = pilotService;
+            this.aeroplaneService = aeroplaneService;
         }
 
-        // GET: api/pilots
+        // GET: api/aeroplanes
         [HttpGet]
         public IActionResult Get()
         {
-            IEnumerable<PilotDto> pilotDtos;
+            IEnumerable<AeroplaneDto> aeroplaneDtos;
 
             try
             {
-                pilotDtos = pilotService.GetAll();
+                aeroplaneDtos = aeroplaneService.GetAll();
             }
             catch (Exception ex)
             {
                 return BadRequest(new { ErrorType = ex.GetType().Name, ex.Message });
             }
 
-            return Ok(pilotDtos);
+            return Ok(aeroplaneDtos);
         }
 
-        // GET: api/pilots/:id
+        // GET: api/aeroplanes/:id
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
-            PilotDto pilotDto;
+            AeroplaneDto aeroplaneDto;
 
             try
             {
-                pilotDto = pilotService.Get(id);
+                aeroplaneDto = aeroplaneService.Get(id);
             }
             catch (Exception ex)
             {
                 return BadRequest(new { ErrorType = ex.GetType().Name, ex.Message });
             }
 
-            return Ok(pilotDto);
+            return Ok(aeroplaneDto);
         }
 
-        // POST api/pilots
+        // POST api/aeroplanes
         [HttpPost]
-        public IActionResult Post([FromBody]PilotDto pilotDto)
+        public IActionResult Post([FromBody]AeroplaneDto aeroplaneDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(new { ErrorMessage = ModelState });
             }
 
-            PilotDto resultDto;
+            AeroplaneDto resultDto;
 
             try
             {
-                resultDto = pilotService.Create(pilotDto);
+                resultDto = aeroplaneService.Create(aeroplaneDto);
             }
             catch (Exception ex)
             {
@@ -76,20 +76,20 @@ namespace Airport.API.Controllers
             return Ok(resultDto);
         }
 
-        // PUT api/pilots/:id
+        // PUT api/aeroplanes/:id
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody]PilotDto pilotDto)
+        public IActionResult Put(Guid id, [FromBody]AeroplaneDto aeroplaneDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(new { ErrorMessage = ModelState });
             }
 
-            PilotDto resultDto;
+            AeroplaneDto resultDto;
 
             try
             {
-                resultDto = pilotService.Update(id, pilotDto);
+                resultDto = aeroplaneService.Update(id, aeroplaneDto);
             }
             catch (Exception ex)
             {
@@ -99,13 +99,13 @@ namespace Airport.API.Controllers
             return Ok(resultDto);
         }
 
-        // DELETE api/pilots
+        // DELETE api/aeroplanes
         [HttpDelete]
         public IActionResult Delete()
         {
             try
             {
-                pilotService.DeleteAll();
+                aeroplaneService.DeleteAll();
             }
             catch (Exception ex)
             {
@@ -115,13 +115,13 @@ namespace Airport.API.Controllers
             return NoContent();
         }
 
-        // DELETE api/pilots/:id
+        // DELETE api/aeroplanes/:id
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
             try
             {
-                pilotService.Delete(id);
+                aeroplaneService.Delete(id);
             }
             catch (Exception ex)
             {

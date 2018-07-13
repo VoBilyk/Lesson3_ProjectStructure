@@ -10,7 +10,7 @@ namespace Airport.API.Controllers
     [Route("api/[controller]")]
     public class TicketsController : Controller
     {
-        ITicketService ticketService;
+        private ITicketService ticketService;
         public TicketsController(ITicketService ticketService)
         {
             this.ticketService = ticketService;

@@ -8,65 +8,65 @@ using Airport.Shared.DTO;
 namespace Airport.API.Controllers
 {
     [Route("api/[controller]")]
-    public class PilotsController : Controller
+    public class AeroplaneTypesController : Controller
     {
-        private IPilotService pilotService;
+        private IAeroplaneTypeService aeroplaneTypeService;
 
-        public PilotsController(IPilotService pilotService)
+        public AeroplaneTypesController(IAeroplaneTypeService aeroplaneTypeService)
         {
-            this.pilotService = pilotService;
+            this.aeroplaneTypeService = aeroplaneTypeService;
         }
 
-        // GET: api/pilots
+        // GET: api/aeroplaneTypes
         [HttpGet]
         public IActionResult Get()
         {
-            IEnumerable<PilotDto> pilotDtos;
+            IEnumerable<AeroplaneTypeDto> aeroplaneTypeDtos;
 
             try
             {
-                pilotDtos = pilotService.GetAll();
+                aeroplaneTypeDtos = aeroplaneTypeService.GetAll();
             }
             catch (Exception ex)
             {
                 return BadRequest(new { ErrorType = ex.GetType().Name, ex.Message });
             }
 
-            return Ok(pilotDtos);
+            return Ok(aeroplaneTypeDtos);
         }
 
-        // GET: api/pilots/:id
+        // GET: api/aeroplaneTypes/:id
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
-            PilotDto pilotDto;
+            AeroplaneTypeDto aeroplaneTypeDto;
 
             try
             {
-                pilotDto = pilotService.Get(id);
+                aeroplaneTypeDto = aeroplaneTypeService.Get(id);
             }
             catch (Exception ex)
             {
                 return BadRequest(new { ErrorType = ex.GetType().Name, ex.Message });
             }
 
-            return Ok(pilotDto);
+            return Ok(aeroplaneTypeDto);
         }
 
-        // POST api/pilots
+        // POST api/aeroplaneTypes
         [HttpPost]
-        public IActionResult Post([FromBody]PilotDto pilotDto)
+        public IActionResult Post([FromBody]AeroplaneTypeDto aeroplaneTypeDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(new { ErrorMessage = ModelState });
             }
 
-            PilotDto resultDto;
+            AeroplaneTypeDto resultDto;
 
             try
             {
-                resultDto = pilotService.Create(pilotDto);
+                resultDto = aeroplaneTypeService.Create(aeroplaneTypeDto);
             }
             catch (Exception ex)
             {
@@ -76,20 +76,20 @@ namespace Airport.API.Controllers
             return Ok(resultDto);
         }
 
-        // PUT api/pilots/:id
+        // PUT api/aeroplaneTypes/:id
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody]PilotDto pilotDto)
+        public IActionResult Put(Guid id, [FromBody]AeroplaneTypeDto aeroplaneTypeDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(new { ErrorMessage = ModelState });
             }
 
-            PilotDto resultDto;
+            AeroplaneTypeDto resultDto;
 
             try
             {
-                resultDto = pilotService.Update(id, pilotDto);
+                resultDto = aeroplaneTypeService.Update(id, aeroplaneTypeDto);
             }
             catch (Exception ex)
             {
@@ -99,13 +99,13 @@ namespace Airport.API.Controllers
             return Ok(resultDto);
         }
 
-        // DELETE api/pilots
+        // DELETE api/aeroplaneTypes
         [HttpDelete]
         public IActionResult Delete()
         {
             try
             {
-                pilotService.DeleteAll();
+                aeroplaneTypeService.DeleteAll();
             }
             catch (Exception ex)
             {
@@ -115,13 +115,13 @@ namespace Airport.API.Controllers
             return NoContent();
         }
 
-        // DELETE api/pilots/:id
+        // DELETE api/aeroplaneTypes/:id
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
             try
             {
-                pilotService.Delete(id);
+                aeroplaneTypeService.Delete(id);
             }
             catch (Exception ex)
             {
