@@ -26,27 +26,29 @@ namespace Airport.BLL.Services
             return mapper.Map<Departure, DepartureDto>(db.DepartureRepository.Get(id));
         }
 
-        public IEnumerable<DepartureDto> GetAll()
+        public List<DepartureDto> GetAll()
         {
-            return mapper.Map<IEnumerable<Departure>, IEnumerable<DepartureDto>>(db.DepartureRepository.GetAll());
+            return mapper.Map<List<Departure>, List<DepartureDto>>(db.DepartureRepository.GetAll());
         }
 
         public DepartureDto Create(DepartureDto departureDto)
         {
-            departureDto.Id = Guid.NewGuid();
             var departure = mapper.Map<DepartureDto, Departure>(departureDto);
-            var resultDeparture = db.DepartureRepository.Create(departure);
+            departure.Id = Guid.NewGuid();
+            departure.Crew = db.CrewRepositiry.Get(departureDto.CrewId);
+            departure.Airplane = db.AeroplaneRepository.Get(departureDto.AirplaneId);
 
-            return mapper.Map<Departure, DepartureDto>(resultDeparture);
+            return mapper.Map<Departure, DepartureDto>(db.DepartureRepository.Create(departure));
         }
 
         public DepartureDto Update(Guid id, DepartureDto departureDto)
         {
-            departureDto.Id = id;
             var departure = mapper.Map<DepartureDto, Departure>(departureDto);
-            var resultDeparture = db.DepartureRepository.Update(departure);
+            departure.Id = id;
+            departure.Airplane = db.AeroplaneRepository.Get(departureDto.AirplaneId);
+            departure.Crew = db.CrewRepositiry.Get(departureDto.CrewId);
 
-            return mapper.Map<Departure, DepartureDto>(resultDeparture);
+            return mapper.Map<Departure, DepartureDto>(db.DepartureRepository.Update(departure));
         }
 
         public void Delete(Guid id)

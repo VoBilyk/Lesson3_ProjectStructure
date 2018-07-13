@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Airport.BLL.Interfaces;
 using Airport.DAL.Interfaces;
@@ -26,27 +27,27 @@ namespace Airport.BLL.Services
             return mapper.Map<Flight, FlightDto>(db.FlightRepository.Get(id));
         }
 
-        public IEnumerable<FlightDto> GetAll()
+        public List<FlightDto> GetAll()
         {
-            return mapper.Map<IEnumerable<Flight>, IEnumerable<FlightDto>>(db.FlightRepository.GetAll());
+            return mapper.Map<List<Flight>, List<FlightDto>>(db.FlightRepository.GetAll());
         }
 
         public FlightDto Create(FlightDto flightDto)
         {
-            flightDto.Id = Guid.NewGuid();
             var flight = mapper.Map<FlightDto, Flight>(flightDto);
-            var resultFlight = db.FlightRepository.Create(flight);
+            flight.Id = Guid.NewGuid();
+            flight.Tickets = db.TicketRepository.GetAll().Where(i => flightDto.TicketsId.Contains(i.Id)).ToList();
 
-            return mapper.Map<Flight, FlightDto>(resultFlight);
+            return mapper.Map<Flight, FlightDto>(db.FlightRepository.Create(flight));
         }
 
         public FlightDto Update(Guid id, FlightDto flightDto)
         {
-            flightDto.Id = id;
             var flight = mapper.Map<FlightDto, Flight>(flightDto);
-            var resultFlight = db.FlightRepository.Update(flight);
-
-            return mapper.Map<Flight, FlightDto>(resultFlight);
+            flight.Id = id;
+            flight.Tickets = db.TicketRepository.GetAll().Where(i => flightDto.TicketsId.Contains(i.Id)).ToList();
+            
+            return mapper.Map<Flight, FlightDto>(db.FlightRepository.Update(flight));
         }
 
         public void Delete(Guid id)

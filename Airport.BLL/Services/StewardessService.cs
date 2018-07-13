@@ -26,27 +26,25 @@ namespace Airport.BLL.Services
             return mapper.Map<Stewardess, StewardessDto>(db.StewardessRepositiry.Get(id));
         }
 
-        public IEnumerable<StewardessDto> GetAll()
+        public List<StewardessDto> GetAll()
         {
-            return mapper.Map<IEnumerable<Stewardess>, IEnumerable<StewardessDto>>(db.StewardessRepositiry.GetAll());
+            return mapper.Map<List<Stewardess>, List<StewardessDto>>(db.StewardessRepositiry.GetAll());
         }
 
         public StewardessDto Create(StewardessDto stewardessDto)
         {
-            stewardessDto.Id = Guid.NewGuid();
             var stewardess = mapper.Map<StewardessDto, Stewardess>(stewardessDto);
-            var resultStewardess = db.StewardessRepositiry.Create(stewardess);
-
-            return mapper.Map<Stewardess, StewardessDto>(resultStewardess);
+            stewardess.Id = Guid.NewGuid();
+            
+            return mapper.Map<Stewardess, StewardessDto>(db.StewardessRepositiry.Create(stewardess));
         }
 
         public StewardessDto Update(Guid id, StewardessDto stewardessDto)
         {
-            stewardessDto.Id = id;
             var stewardess = mapper.Map<StewardessDto, Stewardess>(stewardessDto);
-            var resultStewardess = db.StewardessRepositiry.Update(stewardess);
+            stewardess.Id = id;
 
-            return mapper.Map<Stewardess, StewardessDto>(resultStewardess);
+            return mapper.Map<Stewardess, StewardessDto>(db.StewardessRepositiry.Update(stewardess));
         }
 
         public void Delete(Guid id)

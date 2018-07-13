@@ -25,27 +25,25 @@ namespace Airport.BLL.Services
             return mapper.Map<AeroplaneType, AeroplaneTypeDto>(db.AeroplaneTypeRepository.Get(id));
         }
 
-        public IEnumerable<AeroplaneTypeDto> GetAll()
+        public List<AeroplaneTypeDto> GetAll()
         {
-            return mapper.Map<IEnumerable<AeroplaneType>, IEnumerable<AeroplaneTypeDto>>(db.AeroplaneTypeRepository.GetAll());
+            return mapper.Map<List<AeroplaneType>, List<AeroplaneTypeDto>>(db.AeroplaneTypeRepository.GetAll());
         }
 
         public AeroplaneTypeDto Create(AeroplaneTypeDto aeroplaneTypeDto)
         {
-            aeroplaneTypeDto.Id = Guid.NewGuid();
             var aeroplaneType = mapper.Map<AeroplaneTypeDto, AeroplaneType>(aeroplaneTypeDto);
-            var resultAeroplaneType = db.AeroplaneTypeRepository.Create(aeroplaneType);
+            aeroplaneType.Id = Guid.NewGuid();
 
-            return mapper.Map<AeroplaneType, AeroplaneTypeDto>(resultAeroplaneType);
+            return mapper.Map<AeroplaneType, AeroplaneTypeDto>(db.AeroplaneTypeRepository.Create(aeroplaneType));
         }
 
         public AeroplaneTypeDto Update(Guid id, AeroplaneTypeDto aeroplaneTypeDto)
         {
-            aeroplaneTypeDto.Id = id;
             var aeroplaneType = mapper.Map<AeroplaneTypeDto, AeroplaneType>(aeroplaneTypeDto);
-            var resultAeroplaneType = db.AeroplaneTypeRepository.Update(aeroplaneType);
+            aeroplaneType.Id = id;
 
-            return mapper.Map<AeroplaneType, AeroplaneTypeDto>(resultAeroplaneType);
+            return mapper.Map<AeroplaneType, AeroplaneTypeDto>(db.AeroplaneTypeRepository.Update(aeroplaneType));
         }
 
         public void Delete(Guid id)

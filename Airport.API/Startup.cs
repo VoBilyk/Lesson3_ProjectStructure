@@ -64,20 +64,8 @@ namespace Airport.API
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Aeroplane, AeroplaneDto>();
-                cfg.CreateMap<AeroplaneDto, Aeroplane>();
-
                 cfg.CreateMap<AeroplaneType, AeroplaneTypeDto>();
                 cfg.CreateMap<AeroplaneTypeDto, AeroplaneType>();
-
-                cfg.CreateMap<Crew, CrewDto>();
-                cfg.CreateMap<CrewDto, Crew>();
-
-                cfg.CreateMap<Departure, DepartureDto>();
-                cfg.CreateMap<DepartureDto, Departure>();
-
-                cfg.CreateMap<Flight, FlightDto>();
-                cfg.CreateMap<FlightDto, Flight>();
 
                 cfg.CreateMap<Pilot, PilotDto>();
                 cfg.CreateMap<PilotDto, Pilot>();
@@ -85,8 +73,28 @@ namespace Airport.API
                 cfg.CreateMap<Stewardess, StewardessDto>();
                 cfg.CreateMap<StewardessDto, Stewardess>();
 
-                cfg.CreateMap<Ticket, TicketDto>();
+                cfg.CreateMap<AeroplaneDto, Aeroplane>();
+                cfg.CreateMap<Aeroplane, AeroplaneDto>()
+                 .ForMember(dto => dto.AeroplaneTypeId, model => model.MapFrom(m => m.AeroplaneType.Id));
+
+                cfg.CreateMap<CrewDto, Crew>();
+                cfg.CreateMap<Crew, CrewDto>()
+                 .ForMember(dto => dto.PilotId, model => model.MapFrom(m => m.Pilot.Id))
+                 .ForMember(dto => dto.StewardessesId, model => model.MapFrom(m => m.Stewardesses.Select(s => s.Id)));
+
+                cfg.CreateMap<DepartureDto, Departure>();
+                cfg.CreateMap<Departure, DepartureDto>()
+                 .ForMember(dto => dto.AirplaneId, model => model.MapFrom(m => m.Airplane.Id))
+                 .ForMember(dto => dto.CrewId, model => model.MapFrom(m => m.Crew.Id));
+
+
+                cfg.CreateMap<FlightDto, Flight>();
+                cfg.CreateMap<Flight, FlightDto>()
+                 .ForMember(dto => dto.TicketsId, model => model.MapFrom(m => m.Tickets.Select(t => t.Id)));
+
                 cfg.CreateMap<TicketDto, Ticket>();
+                cfg.CreateMap<Ticket, TicketDto>()
+                 .ForMember(dto => dto.FlightId, model => model.MapFrom(m => m.Flight.Id));
             });
 
             return config;

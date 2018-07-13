@@ -5,7 +5,7 @@ namespace Airport.DAL.Interfaces
 {
     public interface IRepository<TEntity>
     {
-        IEnumerable<TEntity> GetAll();
+        List<TEntity> GetAll();
 
         TEntity Get(Guid id);
 

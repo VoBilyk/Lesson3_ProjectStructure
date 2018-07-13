@@ -7,7 +7,7 @@ namespace Airport.BLL.Interfaces
     {
         TDto Get(Guid id);
 
-        IEnumerable<TDto> GetAll();
+        List<TDto> GetAll();
 
         TDto Create(TDto dto);
 

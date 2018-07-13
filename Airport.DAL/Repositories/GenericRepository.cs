@@ -25,7 +25,7 @@ namespace Airport.DAL.Repositories
             return item;
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public List<TEntity> GetAll()
         {
             return db;
         }

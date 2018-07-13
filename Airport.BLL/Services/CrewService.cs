@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Airport.BLL.Interfaces;
 using Airport.DAL.Interfaces;
 using Airport.DAL.Models;
@@ -25,27 +26,31 @@ namespace Airport.BLL.Services
             return mapper.Map<Crew, CrewDto>(db.CrewRepositiry.Get(id));
         }
 
-        public IEnumerable<CrewDto> GetAll()
+        public List<CrewDto> GetAll()
         {
-            return mapper.Map<IEnumerable<Crew>, IEnumerable<CrewDto>>(db.CrewRepositiry.GetAll());
+            return mapper.Map<List<Crew>, List<CrewDto>>(db.CrewRepositiry.GetAll());
         }
 
         public CrewDto Create(CrewDto crewDto)
         {
-            crewDto.Id = Guid.NewGuid();
             var crew = mapper.Map<CrewDto, Crew>(crewDto);
-            var resultCrew = db.CrewRepositiry.Create(crew);
 
-            return mapper.Map<Crew, CrewDto>(resultCrew);
+            crew.Id = Guid.NewGuid();
+            crew.Pilot = db.PilotRepositiry.Get(crewDto.PilotId);
+            crew.Stewardesses = db.StewardessRepositiry.GetAll().Where(i => crewDto.StewardessesId.Contains(i.Id)).ToList();
+            
+            return mapper.Map<Crew, CrewDto>(db.CrewRepositiry.Create(crew));
         }
 
         public CrewDto Update(Guid id, CrewDto crewDto)
         {
-            crewDto.Id = id;
             var crew = mapper.Map<CrewDto, Crew>(crewDto);
-            var resultCrew = db.CrewRepositiry.Update(crew);
 
-            return mapper.Map<Crew, CrewDto>(resultCrew);
+            crew.Id = id;
+            crew.Pilot = db.PilotRepositiry.Get(crewDto.PilotId);
+            crew.Stewardesses = db.StewardessRepositiry.GetAll().Where(i => crewDto.StewardessesId.Contains(i.Id)).ToList();
+
+            return mapper.Map<Crew, CrewDto>(db.CrewRepositiry.Update(crew));
         }
 
         public void Delete(Guid id)

@@ -12,7 +12,7 @@ namespace Airport.Shared.DTO
         public DateTime Time { get; set; }
 
         [Required]
-        public CrewDto Crew { get; set; }
+        public Guid CrewId { get; set; }
 
         [Required]
         public Guid AirplaneId { get; set; }

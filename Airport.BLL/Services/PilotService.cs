@@ -25,27 +25,25 @@ namespace Airport.BLL.Services
             return mapper.Map<Pilot, PilotDto>(db.PilotRepositiry.Get(id));
         }
 
-        public IEnumerable<PilotDto> GetAll()
+        public List<PilotDto> GetAll()
         {
-            return mapper.Map<IEnumerable<Pilot>, IEnumerable<PilotDto>>(db.PilotRepositiry.GetAll());
+            return mapper.Map<List<Pilot>, List<PilotDto>>(db.PilotRepositiry.GetAll());
         }
 
         public PilotDto Create(PilotDto pilotDto)
         {
-            pilotDto.Id = Guid.NewGuid();
             var pilot = mapper.Map<PilotDto, Pilot>(pilotDto);
-            var resultPilot = db.PilotRepositiry.Create(pilot);
+            pilot.Id = Guid.NewGuid();
 
-            return mapper.Map<Pilot, PilotDto>(resultPilot);
+            return mapper.Map<Pilot, PilotDto>(db.PilotRepositiry.Create(pilot));
         }
 
         public PilotDto Update(Guid id, PilotDto pilotDto)
         {
-            pilotDto.Id = id;
             var pilot = mapper.Map<PilotDto, Pilot>(pilotDto);
-            var resultPilot = db.PilotRepositiry.Update(pilot);
+            pilot.Id = id;
 
-            return mapper.Map<Pilot, PilotDto>(resultPilot);
+            return mapper.Map<Pilot, PilotDto>(db.PilotRepositiry.Update(pilot));
         }
 
         public void Delete(Guid id)
