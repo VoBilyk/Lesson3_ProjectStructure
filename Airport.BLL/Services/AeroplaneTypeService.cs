@@ -30,20 +30,24 @@ namespace Airport.BLL.Services
             return mapper.Map<List<AeroplaneType>, List<AeroplaneTypeDto>>(db.AeroplaneTypeRepository.GetAll());
         }
 
-        public void Create(AeroplaneTypeDto aeroplaneTypeDto)
+        public AeroplaneTypeDto Create(AeroplaneTypeDto aeroplaneTypeDto)
         {
             var aeroplaneType = mapper.Map<AeroplaneTypeDto, AeroplaneType>(aeroplaneTypeDto);
             aeroplaneType.Id = Guid.NewGuid();
 
             db.AeroplaneTypeRepository.Create(aeroplaneType);
+
+            return mapper.Map<AeroplaneType, AeroplaneTypeDto>(aeroplaneType);
         }
 
-        public void Update(Guid id, AeroplaneTypeDto aeroplaneTypeDto)
+        public AeroplaneTypeDto Update(Guid id, AeroplaneTypeDto aeroplaneTypeDto)
         {
             var aeroplaneType = mapper.Map<AeroplaneTypeDto, AeroplaneType>(aeroplaneTypeDto);
             aeroplaneType.Id = id;
 
             db.AeroplaneTypeRepository.Update(aeroplaneType);
+
+            return mapper.Map<AeroplaneType, AeroplaneTypeDto>(aeroplaneType);
         }
 
         public void Delete(Guid id)
