@@ -79,11 +79,10 @@ namespace Airport.DAL
             flights = flightFaker.Generate(15);
             tickets = ticketFaker.Generate(40);
 
-
             // Connecting tickets to flight
             foreach (var flight in flights)
             {
-                flight.Tickets.Where(t => t.Flight.Id == flight.Id).ToList();
+                flight.Tickets = tickets.Where(t => t.Flight.Id == flight.Id).ToList();
             }
         }
 
