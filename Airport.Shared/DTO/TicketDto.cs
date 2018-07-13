@@ -12,7 +12,7 @@ namespace Airport.Shared.DTO
         [Required]
         public decimal Price { get; set; }
 
-        //[Required]
+        [Required]
         public Guid FlightId { get; set; }
     }
 }

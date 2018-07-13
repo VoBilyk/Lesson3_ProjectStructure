@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Airport.Shared.DTO
 {
@@ -6,10 +7,13 @@ namespace Airport.Shared.DTO
     {
         public Guid Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         public AeroplaneTypeDto AeroplaneType { get; set; }
 
+        [Required]
         public TimeSpan Lifetime { get; set; }
     }
 }

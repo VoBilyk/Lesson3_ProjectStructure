@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace Airport.Shared.DTO
 {
@@ -8,10 +8,13 @@ namespace Airport.Shared.DTO
     {
         public Guid Id { get; set; }
 
+        [Required]
         public DateTime Time { get; set; }
 
+        [Required]
         public CrewDto Crew { get; set; }
 
+        [Required]
         public AeroplaneDto Airplane { get; set; }
     }
 }
