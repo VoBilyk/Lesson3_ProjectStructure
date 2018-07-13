@@ -11,7 +11,7 @@ namespace Airport.Shared.DTO
         public string Name { get; set; }
 
         [Required]
-        public AeroplaneTypeDto AeroplaneType { get; set; }
+        public Guid AeroplaneTypeId { get; set; }
 
         [Required]
         public TimeSpan Lifetime { get; set; }

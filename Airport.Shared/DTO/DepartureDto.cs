@@ -15,6 +15,6 @@ namespace Airport.Shared.DTO
         public CrewDto Crew { get; set; }
 
         [Required]
-        public AeroplaneDto Airplane { get; set; }
+        public Guid AirplaneId { get; set; }
     }
 }

@@ -13,6 +13,6 @@ namespace Airport.Shared.DTO
         public PilotDto Pilot { get; set; }
 
         [Required]
-        public List<StewardessDto> Stewardesses { get; set; }
+        public List<Guid> StewardessesId { get; set; }
     }
 }
