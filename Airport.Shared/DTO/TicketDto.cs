@@ -13,6 +13,6 @@ namespace Airport.Shared.DTO
         public decimal Price { get; set; }
 
         //[Required]
-        public FlightDto Flight { get; set; }
+        public Guid FlightId { get; set; }
     }
 }

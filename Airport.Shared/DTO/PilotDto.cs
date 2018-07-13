@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace Airport.Shared.DTO
 {
@@ -12,6 +11,8 @@ namespace Airport.Shared.DTO
 
         public string SecondName { get; set; }
 
-        public TimeSpan Experience { get; set; }
+        public int Experience { get; set; }
+
+        public DateTime BirthDate { get; set; }
     }
 }

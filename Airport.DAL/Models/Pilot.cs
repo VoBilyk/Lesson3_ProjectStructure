@@ -11,6 +11,8 @@ namespace Airport.DAL.Models
 
         public string SecondName { get; set; }
 
-        public TimeSpan Experience { get; set; }
+        public int Experience { get; set; }
+
+        public DateTime BirthDate { get; set; }
     }
 }
