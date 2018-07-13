@@ -31,20 +31,24 @@ namespace Airport.BLL.Services
             return mapper.Map<List<Stewardess>, List<StewardessDto>>(db.StewardessRepositiry.GetAll());
         }
 
-        public void Create(StewardessDto stewardessDto)
+        public StewardessDto Create(StewardessDto stewardessDto)
         {
             var stewardess = mapper.Map<StewardessDto, Stewardess>(stewardessDto);
             stewardess.Id = Guid.NewGuid();
 
             db.StewardessRepositiry.Create(stewardess);
+
+            return mapper.Map<Stewardess, StewardessDto>(stewardess);
         }
 
-        public void Update(Guid id, StewardessDto stewardessDto)
+        public StewardessDto Update(Guid id, StewardessDto stewardessDto)
         {
             var stewardess = mapper.Map<StewardessDto, Stewardess>(stewardessDto);
             stewardess.Id = id;
 
             db.StewardessRepositiry.Update(stewardess);
+
+            return mapper.Map<Stewardess, StewardessDto>(stewardess);
         }
 
         public void Delete(Guid id)

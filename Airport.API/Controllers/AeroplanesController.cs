@@ -61,17 +61,19 @@ namespace Airport.API.Controllers
             {
                 return BadRequest(new { Type = "ValidationError", ErrorMessage = "Required fields is empty" });
             }
-            
+
+            AeroplaneDto resultDto;
+
             try
             {
-                aeroplaneService.Create(aeroplaneDto);
+                resultDto = aeroplaneService.Create(aeroplaneDto);
             }
             catch (Exception ex)
             {
                 return BadRequest(new { ErrorType = ex.GetType().Name, ex.Message });
             }
 
-            return Ok();
+            return Ok(resultDto);
         }
 
         // PUT api/aeroplanes/:id
@@ -87,8 +89,7 @@ namespace Airport.API.Controllers
 
             try
             {
-                aeroplaneService.Update(id, aeroplaneDto);
-                resultDto = aeroplaneService.Get(id);
+                resultDto = aeroplaneService.Update(id, aeroplaneDto);
             }
             catch (Exception ex)
             {
