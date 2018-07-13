@@ -24,14 +24,14 @@ namespace Airport.DAL
                 .RuleFor(o => o.Id, f => Guid.NewGuid())
                 .RuleFor(o => o.FirstName, f => f.Name.FirstName(Bogus.DataSets.Name.Gender.Male))
                 .RuleFor(o => o.SecondName, f => f.Name.LastName())
-                .RuleFor(o => o.BirthDate, f => f.Date.Past(30, new DateTime(1990, 1, 1)))
+                .RuleFor(o => o.BirthDate, f => f.Date.Past(30, new DateTime(1990, 1, 1)).ToUniversalTime())
                 .RuleFor(o => o.Experience, f => f.Random.Number(5, 40));
 
             var stewardessFaker = new Faker<Stewardess>()
                 .RuleFor(o => o.Id, f => Guid.NewGuid())
                 .RuleFor(o => o.FirstName, f => f.Name.FirstName(Bogus.DataSets.Name.Gender.Female))
                 .RuleFor(o => o.SecondName, f => f.Name.LastName())
-                .RuleFor(o => o.BirthDate, f => f.Date.Past(20, new DateTime(2000, 1, 1)));
+                .RuleFor(o => o.BirthDate, f => f.Date.Past(20, new DateTime(2000, 1, 1)).ToUniversalTime());
 
             var crewFaker = new Faker<Crew>()
                 .RuleFor(o => o.Id, f => Guid.NewGuid())
@@ -54,14 +54,14 @@ namespace Airport.DAL
                 .RuleFor(o => o.Id, f => Guid.NewGuid())
                 .RuleFor(o => o.Airplane, f => f.PickRandom(aeroplanes))
                 .RuleFor(o => o.Crew, f => f.PickRandom(crews))
-                .RuleFor(o => o.Time, f => f.Date.Soon(200));
+                .RuleFor(o => o.Time, f => f.Date.Soon(200).ToUniversalTime());
 
             var flightFaker = new Faker<Flight>()
                 .RuleFor(o => o.Id, f => Guid.NewGuid())
                 .RuleFor(o => o.DeparturePoint, f => f.Address.City())
                 .RuleFor(o => o.Destinition, f => f.Address.City())
-                .RuleFor(o => o.DepartureTime, f => f.Date.Soon(365))
-                .RuleFor(o => o.ArrivalTime, (f, o) => o.DepartureTime + f.Date.Timespan(new TimeSpan(8,0,0)));
+                .RuleFor(o => o.DepartureTime, f => f.Date.Soon(365).ToUniversalTime())
+                .RuleFor(o => o.ArrivalTime, (f, o) => (o.DepartureTime + f.Date.Timespan(new TimeSpan(8,0,0))).ToUniversalTime());
 
             var ticketFaker = new Faker<Ticket>()
                 .RuleFor(o => o.Id, f => Guid.NewGuid())

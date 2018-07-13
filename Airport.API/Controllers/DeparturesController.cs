@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Airport.BLL.Interfaces;
@@ -59,7 +60,7 @@ namespace Airport.API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new { Type = "ValidationError", ErrorMessage = "Required fields is empty" });
+                return BadRequest(new { Type = "ValidationError", ErrorMessage = "Required fields is empty"  });
             }
             
             try
