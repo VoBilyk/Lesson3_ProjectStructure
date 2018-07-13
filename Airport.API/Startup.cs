@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using AutoMapper;
 using Airport.DAL;
 using Airport.DAL.Interfaces;
@@ -43,9 +38,6 @@ namespace Airport.API
             services.AddScoped<IStewardessService, StewardessService>();
             services.AddScoped<IFlightService, FlightService>();
             services.AddScoped<IDepartureService, DepartureService>();
-
-
-
             services.AddScoped(_ => MapperConfiguration().CreateMapper());
         }
 
